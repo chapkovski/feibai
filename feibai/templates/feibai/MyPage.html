@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+{{ form.rnd_num_clicked.errors }}
+<div class="container">
+  <div class="row"><hr></div>
+<div class="row">
+  <button id='btn_gen' class="btn btn-primary" type="button">
+  Generate new number: <span class="badge" id='rndnum'></span>
+</button>
+  </div>
+  </div>
+<hr>
+<input type="hidden" name="rnd_num_shown" value="0" id="id_rnd_num_shown"/>
+<input type="hidden" name="rnd_num_clicked"  value=0 id="id_rnd_num_clicked"/>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  var a = [];
+  $("#btn_gen").click(function() {
+  myrnd = Math.floor(Math.random() * 6) + 1;
+
+  a.push(myrnd);
+  $('#rndnum').text(myrnd);
+  $('#id_rnd_num_shown').val(a);
+  nclick = a.length;
+  console.log(nclick);
+  $('#id_rnd_num_clicked').val(nclick);
+  });
+</script>
+{% endblock %}
